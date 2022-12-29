@@ -60,7 +60,7 @@ For the database, I'm using the headless CMS tool GraphCMS, thus, also leaving t
 
 Made by Gui Recordon 👋🏽 Hit me up!
 
-[![Twitter Badge](https://img.shields.io/badge/-@tgmarinho-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/guirecordon)](https://twitter.com/guirecordon) [![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/guirecordon/)](https://www.linkedin.com/in/guirecordon/)
+[![Twitter Badge](https://img.shields.io/badge/-@guirecordon-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/gui_recordon)](https://twitter.com/gui_recordon) [![Linkedin Badge](https://img.shields.io/badge/-Gui-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/gui-recordon-react-developer/)](https://www.linkedin.com/in/gui-recordon-react-developer/)
 [![Gmail Badge](https://img.shields.io/badge/-guilherme.recordon@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:guilherme.recordon@gmail.com)](mailto:guilherme.recordon@gmail.com)
 
 MIT License
