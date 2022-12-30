@@ -1,3 +1,3 @@
 export function Products() {
-  return <h1>Products of any given category</h1>;
+  return <h1>Products of any given category</h1>
 }

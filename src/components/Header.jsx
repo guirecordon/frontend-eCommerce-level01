@@ -1,3 +1,5 @@
+import { HeaderContainer } from './Header.styles'
+
 export function Header() {
-  return <h1>This is a header</h1>;
+  return <HeaderContainer>This is a header</HeaderContainer>
 }
