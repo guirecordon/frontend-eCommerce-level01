@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
+  z-index: 1000;
+
   height: 64px;
   background: ${(props) => props.theme.white};
   color: ${(props) => props.theme.primary};
