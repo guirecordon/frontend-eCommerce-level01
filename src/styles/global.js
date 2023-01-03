@@ -25,4 +25,8 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.primary};
     text-decoration: none;
   }
+
+  li {
+    list-style: none;
+  }
 `;
