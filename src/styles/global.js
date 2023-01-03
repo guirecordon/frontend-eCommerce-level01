@@ -17,6 +17,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
+  button {
+    border: none;
+  }
+
   a {
     color: ${(props) => props.theme.primary};
     text-decoration: none;
