@@ -17,8 +17,12 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
-  button {
+  button, fieldset {
     border: none;
+  }
+
+  fieldset {
+    line-height: 1.6rem;
   }
 
   a {
