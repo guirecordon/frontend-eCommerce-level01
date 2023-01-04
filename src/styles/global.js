@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -16,4 +16,21 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 1rem;
   }
-`
+
+  button, fieldset {
+    border: none;
+  }
+
+  fieldset {
+    line-height: 1.6rem;
+  }
+
+  a {
+    color: ${(props) => props.theme.primary};
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+  }
+`;
