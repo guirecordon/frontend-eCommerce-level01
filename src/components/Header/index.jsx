@@ -1,6 +1,7 @@
 import {
   HeaderContainer,
   LeftSideNav,
+  LogoContainer,
   RightSideNav,
   SearchBar,
 } from './styles';
@@ -12,21 +13,13 @@ import {
   UserCircle,
 } from 'phosphor-react';
 import { useState } from 'react';
+import { CartModal } from '../CartModal';
 
 export function Header() {
-  // const [searchOpen, setSearchOpen] = useState(false);
-
-  // function handleSearchBox(e) {
-  //   console.log(e.target);
-  //   console.log(e.currentTarget);
-
-  //   setSearchOpen(true);
-  // }
+  const [open, setOpen] = useState(false);
 
   return (
     <HeaderContainer>
-      <img src={mainLogo} alt="" />
-
       <LeftSideNav>
         <a href="#">
           EN <CaretDown size={16} />
@@ -39,11 +32,11 @@ export function Header() {
         <a href="#">Accessories</a>
       </LeftSideNav>
 
-      <RightSideNav>
-        {/* <a href="#" onClick={handleSearchBox}>
-          {searchOpen ? <input type="text" /> : <MagnifyingGlass size={24} />}
-        </a> */}
+      <LogoContainer>
+        <img src={mainLogo} alt="" />
+      </LogoContainer>
 
+      <RightSideNav>
         <SearchBar>
           <input type="text" placeholder="Search store items..." />
           <MagnifyingGlass size={24} />
@@ -52,9 +45,11 @@ export function Header() {
           <UserCircle size={24} />
         </a>
         <a href="#">
-          <ShoppingCart size={24} />
+          <ShoppingCart size={24} onClick={() => setOpen(!open)} />
         </a>
       </RightSideNav>
+
+      {open && <CartModal />}
     </HeaderContainer>
   );
 }

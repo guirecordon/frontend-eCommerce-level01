@@ -10,9 +10,9 @@ export const HeaderContainer = styled.header`
   position: fixed;
   width: 100%;
   padding: 0 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
   a {
     display: flex;
@@ -26,23 +26,25 @@ export const HeaderContainer = styled.header`
       border-bottom: 3px solid ${(props) => props.theme.fadeText};
     }
   }
-
-  img {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 `;
 
 export const LeftSideNav = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
   gap: 1.5rem;
+`;
+
+export const LogoContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 export const RightSideNav = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
+  align-items: center;
   gap: 2rem;
 `;
 
