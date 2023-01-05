@@ -31,7 +31,7 @@ export function ProductCard() {
       </CardCenter>
 
       <DeleteContainer>
-        <Trash size={24} />
+        <Trash size={24} color="#E11D48" />
       </DeleteContainer>
     </CardContainer>
   );
