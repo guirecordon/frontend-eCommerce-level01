@@ -1,13 +1,13 @@
 import { CardContainer, NewPrice, OldPrice } from './styles';
 
-export function FeaturedCard({ img }) {
+export function FeaturedCard({ image, name, price }) {
   return (
     <CardContainer>
-      <img src={img} alt="" />
-      <p>White Mocha Coat</p>
+      <img src={image} alt="" />
+      <p>{name}</p>
       <p>
         <OldPrice>old price</OldPrice>
-        <NewPrice>new price</NewPrice>
+        <NewPrice>{price}</NewPrice>
       </p>
     </CardContainer>
   );
