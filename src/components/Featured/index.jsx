@@ -5,19 +5,17 @@ import { CardsContainer, FeaturedContainer } from './styles';
 
 const GET_PRODUCTS_QUERY = gql`
   query MyQuery {
-    products {
-      collections {
+    collection(where: { id: "ckdu452ug0gxm0158pysyubmr" }) {
+      id
+      name
+      products {
         id
         name
+        price
+        images {
+          url
+        }
       }
-      description
-      id
-      images {
-        url
-      }
-      name
-      price
-      slug
     }
   }
 `;
@@ -25,15 +23,13 @@ const GET_PRODUCTS_QUERY = gql`
 export function Featured() {
   const { data } = useQuery(GET_PRODUCTS_QUERY);
 
+  console.log(data);
+
   return (
     <FeaturedContainer>
-      <h4>Featured Products</h4>
+      <h4>{data?.collection.name} Collection</h4>
       <CardsContainer>
-        {/* {data?.products.map((product) => {
-          return <li key={product.id}>{product.name}</li>;
-        })} */}
-
-        {data?.products.map((product) => (
+        {data?.collection.products.map((product) => (
           <FeaturedCard
             key={product.id}
             image={product.images[0].url}

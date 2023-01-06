@@ -6,7 +6,7 @@ export function FeaturedCard({ image, name, price }) {
       <img src={image} alt="" />
       <p>{name}</p>
       <p>
-        <OldPrice>old price</OldPrice>
+        <OldPrice>{price * 1.25}</OldPrice>
         <NewPrice>{price}</NewPrice>
       </p>
     </CardContainer>
