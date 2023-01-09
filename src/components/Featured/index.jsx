@@ -23,8 +23,6 @@ const GET_PRODUCTS_QUERY = gql`
 export function Featured() {
   const { data } = useQuery(GET_PRODUCTS_QUERY);
 
-  console.log(data);
-
   return (
     <FeaturedContainer>
       <h4>{data?.collection.name} Collection</h4>
