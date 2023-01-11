@@ -30,6 +30,7 @@ export function Featured() {
         {data?.collection.products.map((product) => (
           <FeaturedCard
             key={product.id}
+            id={product.id}
             image={product.images[0].url}
             price={product.price}
             name={product.name}
