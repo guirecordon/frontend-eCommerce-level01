@@ -71,8 +71,9 @@ const GET_CATEGORIES = gql`
 
 export function Products() {
   const params = useParams();
-  console.log(params.id);
   const [displayProducts, setDisplayProducts] = useState([]);
+  const [maxPriceRange, setMaxPriceRange] = useState(1000);
+  const [brandNewPage, setBrandNewPage] = useState(true);
   const { loading, error, data } = useQuery(GET_CATEGORIES);
 
   if (loading) return <p>Loading...</p>;
@@ -91,8 +92,9 @@ export function Products() {
     setDisplayProducts(initialPage);
   }
 
-  if (displayProducts.length === 0) {
+  if (brandNewPage && displayProducts.length === 0) {
     getInitialPage();
+    setBrandNewPage(false);
   }
 
   function handleChange(e) {
@@ -125,6 +127,18 @@ export function Products() {
     }
   }
 
+  function onPriceRangeChange({ target }) {
+    setMaxPriceRange(target.value);
+
+    console.log(maxPriceRange);
+
+    const filteredList = allProducts.filter((product) => product.price < 1500);
+
+    console.log(filteredList);
+
+    setDisplayProducts(filteredList);
+  }
+
   return (
     <ProductsContainer>
       <AsideBar>
@@ -132,40 +146,34 @@ export function Products() {
           <legend>Product Categories</legend>
 
           {data.categories.map((category) => {
-            if (category.id === params.id) {
-              return (
-                <div key={category.id}>
-                  <input
-                    type="checkbox"
-                    id={category.id}
-                    value={category.id}
-                    onChange={handleChange}
-                    checked={true}
-                  />
-                  <label htmlFor={category.id}>{category.name}</label>
-                </div>
-              );
-            } else {
-              return (
-                <div key={category.id}>
-                  <input
-                    type="checkbox"
-                    id={category.id}
-                    value={category.id}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor={category.id}>{category.name}</label>
-                </div>
-              );
-            }
+            return (
+              <div key={category.id}>
+                <input
+                  type="checkbox"
+                  id={category.id}
+                  value={category.id}
+                  onChange={handleChange}
+                />
+                <label htmlFor={category.id}>{category.name}</label>
+              </div>
+            );
           })}
         </fieldset>
 
         <fieldset>
           <legend>Filter by price</legend>
           <span>0</span>
-          <input type="range" min={0} max={1000} />
-          <span>1000+</span>
+          <input
+            type="range"
+            min={0}
+            max={1000}
+            onChange={onPriceRangeChange}
+          />
+          {maxPriceRange > 999 ? (
+            <span>{maxPriceRange}+</span>
+          ) : (
+            <span>{maxPriceRange}</span>
+          )}
         </fieldset>
 
         <fieldset>
