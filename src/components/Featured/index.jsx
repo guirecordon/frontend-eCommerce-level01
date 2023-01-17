@@ -1,5 +1,4 @@
 import { gql, useQuery } from '@apollo/client';
-import featured01 from '../../assets/Home/featured01.svg';
 import { FeaturedCard } from './components/FeaturedCards';
 import { CardsContainer, FeaturedContainer } from './styles';
 

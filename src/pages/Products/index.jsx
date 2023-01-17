@@ -9,42 +9,125 @@ import { FeaturedCard } from '../../components/Featured/components/FeaturedCards
 
 import cover from '../../assets/Products/cover.svg';
 
-import featured01 from '../../assets/Home/featured01.svg';
+import { gql, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
-const cards = [
-  {
-    id: 0,
-    img: featured01,
-  },
-  {
-    id: 1,
-    img: featured01,
-  },
-  {
-    id: 2,
-    img: featured01,
-  },
-  {
-    id: 3,
-    img: featured01,
-  },
-];
+// const cards = [
+//   {
+//     id: 0,
+//     img: featured01,
+//   },
+//   {
+//     id: 1,
+//     img: featured01,
+//   },
+//   {
+//     id: 2,
+//     img: featured01,
+//   },
+//   {
+//     id: 3,
+//     img: featured01,
+//   },
+// ];
+
+// const GET_PRODUCTS = gql`
+//   query MyQuery {
+//     products {
+//       id
+//       name
+//       price
+//       categories {
+//         id
+//         name
+//       }
+//       images {
+//         url
+//       }
+//     }
+//   }
+// `;
+
+const GET_CATEGORIES = gql`
+  query MyQuery {
+    categories {
+      id
+      name
+      products {
+        id
+        name
+        price
+        images {
+          url
+        }
+        categories {
+          id
+        }
+      }
+    }
+  }
+`;
 
 export function Products() {
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const { loading, error, data } = useQuery(GET_CATEGORIES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>error</p>;
+
+  const allProducts = data.categories.reduce((acc, currItem) => {
+    return [...acc, ...currItem.products];
+  }, []);
+
+  function handleChange(e) {
+    if (e.target.checked === true) {
+      const filteredProducts = allProducts.filter((product) => {
+        const categoryArr = product.categories.map((category) => category.id);
+
+        return categoryArr.includes(e.target.value);
+      });
+
+      console.log(filteredProducts);
+
+      setDisplayProducts([...displayProducts, ...filteredProducts]);
+    } else if (e.target.checked === false) {
+      const productsToRemove = allProducts.filter((product) => {
+        const categoriesToRemove = product.categories.map(
+          (category) => category.id,
+        );
+
+        return categoriesToRemove.includes(e.target.value);
+      });
+
+      const updatedProducts = displayProducts.filter((product) => {
+        const removeArray = productsToRemove.map((removable) => {
+          return removable.id;
+        });
+
+        return !removeArray.includes(product.id);
+      });
+
+      setDisplayProducts(updatedProducts);
+    }
+  }
+
   return (
     <ProductsContainer>
       <AsideBar>
         <fieldset>
           <legend>Product Categories</legend>
-          <div>
-            <input type="checkbox" id="hat" name="hat" checked />
-            <label htmlFor="hat">hat</label>
-          </div>
 
-          <div>
-            <input type="checkbox" id="tshirt" name="tshirt" />
-            <label htmlFor="tshirt">tshirt</label>
-          </div>
+          {data.categories.map((category) => (
+            <div key={category.id}>
+              <input
+                type="checkbox"
+                id={category.id}
+                value={category.id}
+                onChange={handleChange}
+              />
+              <label htmlFor={category.id}>{category.name}</label>
+            </div>
+          ))}
         </fieldset>
 
         <fieldset>
@@ -74,8 +157,14 @@ export function Products() {
         </Header>
 
         <ImagesContainer>
-          {cards.map((card) => (
-            <FeaturedCard key={card.id} img={card.img} />
+          {displayProducts.map((product) => (
+            <FeaturedCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.images[0].url}
+            />
           ))}
         </ImagesContainer>
       </RightSide>

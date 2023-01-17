@@ -16,6 +16,9 @@ const GET_COLLECTION_ID = gql`
 export function Home() {
   const { loading, error, data } = useQuery(GET_COLLECTION_ID);
 
+  console.log(loading);
+  console.log(error);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>error</p>;
 

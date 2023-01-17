@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
 import {
   CategoryBtn,
   GridContainer,
@@ -28,38 +29,43 @@ const GET_PANEL_QUERY = gql`
 export function GridPanel() {
   const { data } = useQuery(GET_PANEL_QUERY);
 
-  // const panelArr = data?.categories.map((category) => {
-  //   return {
-  //     name: category.name,
-  //     image: category.panel.url,
-  //   };
-  // });
-
   return (
     <GridContainer>
       <ImgContainer>
         <img src={data?.categories[0].panel.url} alt="" />
-        <CategoryBtn>{data?.categories[0].name}</CategoryBtn>
+        <Link to={'/products/1'}>
+          <CategoryBtn>{data?.categories[0].name}</CategoryBtn>
+        </Link>
       </ImgContainer>
       <ImgContainerSpanVertical>
         <img src={data?.categories[1].panel.url} alt="" />
-        <CategoryBtn>Sales</CategoryBtn>
+        <Link to={'/products/1'}>
+          <CategoryBtn>{data?.categories[1].name}</CategoryBtn>
+        </Link>
       </ImgContainerSpanVertical>
       <ImgContainer>
         <img src={data?.categories[2].panel.url} alt="" />
-        <CategoryBtn>Sales</CategoryBtn>
+        <Link to={'/products/1'}>
+          <CategoryBtn>{data?.categories[2].name}</CategoryBtn>
+        </Link>
       </ImgContainer>
       <ImgContainer>
         <img src={data?.categories[3].panel.url} alt="" />
-        <CategoryBtn>Sales</CategoryBtn>
+        <Link to={'/products/1'}>
+          <CategoryBtn>{data?.categories[3].name}</CategoryBtn>
+        </Link>
       </ImgContainer>
       <ImgContainer>
         <img src={data?.categories[4].panel.url} alt="" />
-        <CategoryBtn>Sales</CategoryBtn>
+        <Link to={'/products/1'}>
+          <CategoryBtn>{data?.categories[4].name}</CategoryBtn>
+        </Link>
       </ImgContainer>
       <ImgContainerSpanHorizontal>
         <img src={data?.categories[5].panel.url} alt="" />
-        <CategoryBtn>Sales</CategoryBtn>
+        <Link to={'/products/1'}>
+          <CategoryBtn>{data?.categories[5].name}</CategoryBtn>
+        </Link>
       </ImgContainerSpanHorizontal>
     </GridContainer>
   );
