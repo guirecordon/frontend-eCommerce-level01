@@ -10,7 +10,8 @@ import { FeaturedCard } from '../../components/Featured/components/FeaturedCards
 import cover from '../../assets/Products/cover.svg';
 
 import { gql, useQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 // const cards = [
 //   {
@@ -69,6 +70,8 @@ const GET_CATEGORIES = gql`
 `;
 
 export function Products() {
+  const params = useParams();
+  console.log(params.id);
   const [displayProducts, setDisplayProducts] = useState([]);
   const { loading, error, data } = useQuery(GET_CATEGORIES);
 
@@ -79,6 +82,19 @@ export function Products() {
     return [...acc, ...currItem.products];
   }, []);
 
+  function getInitialPage() {
+    const initialPage = allProducts.filter((product) => {
+      const categoryArr = product.categories.map((category) => category.id);
+      return categoryArr.includes(params.id);
+    });
+
+    setDisplayProducts(initialPage);
+  }
+
+  if (displayProducts.length === 0) {
+    getInitialPage();
+  }
+
   function handleChange(e) {
     if (e.target.checked === true) {
       const filteredProducts = allProducts.filter((product) => {
@@ -86,8 +102,6 @@ export function Products() {
 
         return categoryArr.includes(e.target.value);
       });
-
-      console.log(filteredProducts);
 
       setDisplayProducts([...displayProducts, ...filteredProducts]);
     } else if (e.target.checked === false) {
@@ -117,17 +131,34 @@ export function Products() {
         <fieldset>
           <legend>Product Categories</legend>
 
-          {data.categories.map((category) => (
-            <div key={category.id}>
-              <input
-                type="checkbox"
-                id={category.id}
-                value={category.id}
-                onChange={handleChange}
-              />
-              <label htmlFor={category.id}>{category.name}</label>
-            </div>
-          ))}
+          {data.categories.map((category) => {
+            if (category.id === params.id) {
+              return (
+                <div key={category.id}>
+                  <input
+                    type="checkbox"
+                    id={category.id}
+                    value={category.id}
+                    onChange={handleChange}
+                    checked={true}
+                  />
+                  <label htmlFor={category.id}>{category.name}</label>
+                </div>
+              );
+            } else {
+              return (
+                <div key={category.id}>
+                  <input
+                    type="checkbox"
+                    id={category.id}
+                    value={category.id}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor={category.id}>{category.name}</label>
+                </div>
+              );
+            }
+          })}
         </fieldset>
 
         <fieldset>
