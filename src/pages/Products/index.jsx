@@ -49,12 +49,19 @@ import { useParams } from 'react-router-dom';
 //   }
 // `;
 
-const GET_CATEGORIES = gql`
+export function Products() {
+  const params = useParams();
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const [maxPriceRange, setMaxPriceRange] = useState(150);
+  const [brandNewPage, setBrandNewPage] = useState(true);
+  const [orderBy, setOrderBy] = useState('price_DESC');
+
+  const GET_CATEGORIES = gql`
   query MyQuery {
     categories {
       id
       name
-      products {
+      products(orderBy: ${orderBy}) {
         id
         name
         price
@@ -69,12 +76,9 @@ const GET_CATEGORIES = gql`
   }
 `;
 
-export function Products() {
-  const params = useParams();
-  const [displayProducts, setDisplayProducts] = useState([]);
-  const [maxPriceRange, setMaxPriceRange] = useState(150);
-  const [brandNewPage, setBrandNewPage] = useState(true);
-  const { loading, error, data } = useQuery(GET_CATEGORIES);
+  const { loading, error, data } = useQuery(GET_CATEGORIES, {
+    variables: { orderBy },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>error</p>;
@@ -141,6 +145,14 @@ export function Products() {
     setDisplayProducts(filteredList);
   }
 
+  function handleLowerFirst() {
+    setOrderBy('price_ASC');
+  }
+
+  function handleHigherFirst() {
+    setOrderBy('price_DESC');
+  }
+
   return (
     <ProductsContainer>
       <AsideBar>
@@ -152,6 +164,7 @@ export function Products() {
               <div key={category.id}>
                 <input
                   type="checkbox"
+                  name="category"
                   id={category.id}
                   value={category.id}
                   onChange={handleChange}
@@ -175,13 +188,19 @@ export function Products() {
 
         <fieldset>
           <legend>Sort by</legend>
-          <div>
-            <input type="radio" id="lowest" name="lowest" checked />
+          <div onClick={handleLowerFirst}>
+            <input
+              type="radio"
+              id="lowest"
+              name="price"
+              value="lowest"
+              checked
+            />
             <label htmlFor="lowest">Price (lowest first)</label>
           </div>
 
-          <div>
-            <input type="radio" id="highest" name="highest" />
+          <div onClick={handleHigherFirst}>
+            <input type="radio" id="highest" name="price" />
             <label htmlFor="highest">Price (highest first)</label>
           </div>
         </fieldset>
