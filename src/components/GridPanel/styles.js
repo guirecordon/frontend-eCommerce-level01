@@ -9,6 +9,8 @@ export const GridContainer = styled.section`
   padding: 1rem;
 
   height: 80vh;
+  width: 100vw;
+  overflow: hidden;
 `;
 
 export const ImgContainer = styled.div`

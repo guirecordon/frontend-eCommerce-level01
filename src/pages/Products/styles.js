@@ -43,8 +43,9 @@ export const Header = styled.div`
 
 export const ImagesContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  gap: 1rem;
+  gap: 0.5rem;
 
   padding: 3rem 1rem;
 `;

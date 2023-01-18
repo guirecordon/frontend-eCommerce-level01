@@ -8,7 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme['green-500']}
+    background: ${(props) => props.theme['green-500']};
+    overflow-x: hidden;
   }
 
   body, input, text-area, button {
