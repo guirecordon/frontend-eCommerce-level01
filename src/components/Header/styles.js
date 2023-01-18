@@ -94,10 +94,15 @@ export const Counter = styled.div`
   left: 0;
 
   background: ${(props) => props.theme.searchBlue};
-  padding: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   font-size: 0.75rem;
   color: ${(props) => props.theme.gray100};
   font-weight: bold;
   border-radius: 50%;
   transform: translate(50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
