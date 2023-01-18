@@ -22,6 +22,7 @@ import { Heart, Scales, ShoppingCart } from 'phosphor-react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
+import { dollarFormatter } from '../../utils/formatter';
 
 export function Product() {
   const { id } = useParams();
@@ -77,7 +78,9 @@ export function Product() {
         <RightSideTop>
           <h3>{data.product.name}</h3>
 
-          <PriceTag>$ {data.product.price}</PriceTag>
+          <PriceTag>
+            {dollarFormatter.format(data.product.price / 100)}
+          </PriceTag>
 
           <ProductDescription>{data.product.description}</ProductDescription>
 

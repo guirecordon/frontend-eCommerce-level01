@@ -72,7 +72,7 @@ const GET_CATEGORIES = gql`
 export function Products() {
   const params = useParams();
   const [displayProducts, setDisplayProducts] = useState([]);
-  const [maxPriceRange, setMaxPriceRange] = useState(1000);
+  const [maxPriceRange, setMaxPriceRange] = useState(150);
   const [brandNewPage, setBrandNewPage] = useState(true);
   const { loading, error, data } = useQuery(GET_CATEGORIES);
 
@@ -132,7 +132,9 @@ export function Products() {
 
     console.log(maxPriceRange);
 
-    const filteredList = allProducts.filter((product) => product.price < 1500);
+    const filteredList = allProducts.filter(
+      (product) => product.price / 100 < maxPriceRange,
+    );
 
     console.log(filteredList);
 
@@ -163,13 +165,8 @@ export function Products() {
         <fieldset>
           <legend>Filter by price</legend>
           <span>0</span>
-          <input
-            type="range"
-            min={0}
-            max={1000}
-            onChange={onPriceRangeChange}
-          />
-          {maxPriceRange > 999 ? (
+          <input type="range" min={0} max={150} onChange={onPriceRangeChange} />
+          {maxPriceRange > 145 ? (
             <span>{maxPriceRange}+</span>
           ) : (
             <span>{maxPriceRange}</span>
