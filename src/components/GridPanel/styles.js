@@ -8,12 +8,15 @@ export const GridContainer = styled.section`
 
   padding: 1rem;
 
-  height: 50rem;
+  height: 80vh;
+  width: 100vw;
+  overflow: hidden;
 `;
 
 export const ImgContainer = styled.div`
   background: ${(props) => props.theme.white};
   grid-column: span 1;
+  overflow: hidden;
 
   img {
     width: 100%;

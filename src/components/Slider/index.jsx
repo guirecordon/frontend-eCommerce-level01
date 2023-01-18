@@ -9,8 +9,6 @@ export function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   function handlePreviousSlide() {
-    console.log(currentSlide);
-
     if (currentSlide === 0) {
       setCurrentSlide(1);
     } else {
@@ -19,8 +17,6 @@ export function Slider() {
   }
 
   function handleNextSlide() {
-    console.log(currentSlide);
-
     if (currentSlide === 1) {
       setCurrentSlide(0);
     } else {

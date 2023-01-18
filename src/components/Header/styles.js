@@ -39,6 +39,12 @@ export const LogoContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  a {
+    &:hover {
+      border: none;
+    }
+  }
 `;
 
 export const RightSideNav = styled.div`

@@ -1,14 +1,20 @@
+import { NavLink } from 'react-router-dom';
+import { dollarFormatter } from '../../../../utils/formatter';
 import { CardContainer, NewPrice, OldPrice } from './styles';
 
-export function FeaturedCard({ img }) {
+export function FeaturedCard({ id, image, name, price }) {
+  const oldPrice = (price / 100) * 1.25;
+
   return (
     <CardContainer>
-      <img src={img} alt="" />
-      <p>White Mocha Coat</p>
-      <p>
-        <OldPrice>old price</OldPrice>
-        <NewPrice>new price</NewPrice>
-      </p>
+      <NavLink to={`/product/${id}`}>
+        <img src={image} alt="" />
+        <p>{name}</p>
+        <p>
+          <OldPrice>{dollarFormatter.format(oldPrice)}</OldPrice>
+          <NewPrice>{dollarFormatter.format(price / 100)}</NewPrice>
+        </p>
+      </NavLink>
     </CardContainer>
   );
 }

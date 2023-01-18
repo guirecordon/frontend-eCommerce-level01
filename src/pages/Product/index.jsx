@@ -20,46 +20,69 @@ import side01 from '../../assets/Home/grid01.svg';
 import side02 from '../../assets/Home/grid02.svg';
 import { Heart, Scales, ShoppingCart } from 'phosphor-react';
 import { useState } from 'react';
-
-const displayImgs = [
-  {
-    id: 0,
-    img: side01,
-  },
-  {
-    id: 1,
-    img: side02,
-  },
-];
+import { useParams } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
+import { dollarFormatter } from '../../utils/formatter';
 
 export function Product() {
-  const [img, setImg] = useState(side01);
+  const { id } = useParams();
+
+  const GET_PRODUCT = gql`
+    query MyQuery {
+      product(where: { id: "${id}" }) {
+        id
+        name
+        price
+        description
+        images {
+          url
+        }
+      }
+    }
+  `;
+
+  const [img, setImg] = useState('');
+
+  const { loading, error, data } = useQuery(GET_PRODUCT);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>error</p>;
+  console.log(data);
 
   return (
     <ProductContainer>
       <LeftSidePage>
         <ImgContainerSmall>
-          <img src={side01} alt="" onClick={() => setImg(side01)} />
-          <img src={side02} alt="" onClick={() => setImg(side02)} />
+          <img
+            src={data.product.images[0].url}
+            alt=""
+            onClick={() => setImg(data.product.images[0].url)}
+          />
+          <img
+            src={data.product.images[1].url}
+            alt=""
+            onClick={() => setImg(data.product.images[1].url)}
+          />
         </ImgContainerSmall>
 
         <ImgContainerMain>
-          <img src={img} alt="" />
+          {img ? (
+            <img src={img} alt="" />
+          ) : (
+            <img src={data.product.images[0].url} alt="" />
+          )}
         </ImgContainerMain>
       </LeftSidePage>
 
       <RightSidePage>
         <RightSideTop>
-          <h3>Long Sleeve Graphic T-shirt</h3>
+          <h3>{data.product.name}</h3>
 
-          <PriceTag>$ 19.99</PriceTag>
+          <PriceTag>
+            {dollarFormatter.format(data.product.price / 100)}
+          </PriceTag>
 
-          <ProductDescription>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
-            aliquam, culpa deserunt ab at explicabo voluptates, commodi nesciunt
-            optio doloremque in maiores facilis eligendi, aliquid porro alias
-            debitis illum nam.
-          </ProductDescription>
+          <ProductDescription>{data.product.description}</ProductDescription>
 
           <QtyCounter>
             <SignButtons>-</SignButtons>1<SignButtons>+</SignButtons>

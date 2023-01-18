@@ -14,6 +14,7 @@ import {
 } from 'phosphor-react';
 import { useState } from 'react';
 import { CartModal } from '../CartModal';
+import { NavLink } from 'react-router-dom';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -33,7 +34,9 @@ export function Header() {
       </LeftSideNav>
 
       <LogoContainer>
-        <img src={mainLogo} alt="" />
+        <NavLink to={'/'}>
+          <img src={mainLogo} alt="" />
+        </NavLink>
       </LogoContainer>
 
       <RightSideNav>
