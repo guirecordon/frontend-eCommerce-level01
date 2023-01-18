@@ -1,4 +1,6 @@
 import {
+  CartHolder,
+  Counter,
   HeaderContainer,
   LeftSideNav,
   LogoContainer,
@@ -47,9 +49,10 @@ export function Header() {
         <a href="#">
           <UserCircle size={24} />
         </a>
-        <a href="#">
+        <CartHolder>
           <ShoppingCart size={24} onClick={() => setOpen(!open)} />
-        </a>
+          <Counter>45</Counter>
+        </CartHolder>
       </RightSideNav>
 
       {open && <CartModal />}
