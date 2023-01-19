@@ -24,7 +24,7 @@ export function CartContextProvider({ children }) {
       (acc, currVal) => {
         return {
           totalQty: (acc.totalQty += currVal.itemQty),
-          totalPrice: (acc.totalPrice += currVal.price),
+          totalPrice: (acc.totalPrice += currVal.price * currVal.itemQty),
         };
       },
       { totalQty: 0, totalPrice: 0 },
