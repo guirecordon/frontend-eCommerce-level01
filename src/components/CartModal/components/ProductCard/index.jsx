@@ -12,7 +12,14 @@ import { dollarFormatter } from '../../../../utils/formatter';
 import { useContext } from 'react';
 import { CartContext } from '../../../../contexts/CartContext';
 
-export function ProductCard({ id, name, price, description, images, itemQty }) {
+export function ProductCard({
+  transId,
+  name,
+  price,
+  description,
+  images,
+  itemQty,
+}) {
   const { onRemoveProduct } = useContext(CartContext);
 
   return (
@@ -32,7 +39,7 @@ export function ProductCard({ id, name, price, description, images, itemQty }) {
         </div>
       </CardCenter>
 
-      <DeleteContainer onClick={() => onRemoveProduct(id)}>
+      <DeleteContainer onClick={() => onRemoveProduct(transId)}>
         <Trash size={24} color="#E11D48" />
       </DeleteContainer>
     </CardContainer>

@@ -6,14 +6,29 @@ export function CartContextProvider({ children }) {
   const [cartArray, setCartArray] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [transactionId, setTransactionId] = useState(0);
 
   function fillCart(product) {
-    setCartArray([...cartArray, { ...product }]);
+    setTransactionId(transactionId + 1);
+    const idArray = cartArray.map((cartItem) => cartItem.id);
+
+    if (idArray.includes(product.id)) {
+      const newArr = cartArray.map((item) => {
+        if (item.id === product.id) {
+          return { ...item, itemQty: item.itemQty + product.itemQty };
+        } else {
+          return { ...item };
+        }
+      });
+      setCartArray(newArr);
+    } else {
+      setCartArray([...cartArray, { ...product, transId: transactionId }]);
+    }
   }
 
-  function onRemoveProduct(id) {
+  function onRemoveProduct(transId) {
     const updatedAfterRemoval = cartArray.filter((product) => {
-      return product.id !== id;
+      return product.transId !== transId;
     });
 
     setCartArray(updatedAfterRemoval);
