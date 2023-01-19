@@ -13,4 +13,6 @@ export const CardsContainer = styled.div`
 
   padding: 2.5rem;
   width: 100%;
+
+  transition: 0.5s ease;
 `;

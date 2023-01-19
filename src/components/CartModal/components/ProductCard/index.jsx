@@ -8,29 +8,38 @@ import {
 
 import cardImg from '../../../../assets/Home/grid06.svg';
 import { Trash } from 'phosphor-react';
+import { dollarFormatter } from '../../../../utils/formatter';
+import { useContext } from 'react';
+import { CartContext } from '../../../../contexts/CartContext';
 
-export function ProductCard() {
+export function ProductCard({
+  transId,
+  name,
+  price,
+  description,
+  images,
+  itemQty,
+}) {
+  const { onRemoveProduct } = useContext(CartContext);
+
   return (
     <CardContainer>
       <ImgContainer>
-        <CartImg src={cardImg} />
+        <CartImg src={images[0].url} />
       </ImgContainer>
 
       <CardCenter>
-        <h4>Long Sleeve Graphic T-shirt</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur,
-          eligendi?
-        </p>
+        <h4>{name}</h4>
+        <p>{description}</p>
 
         <div>
-          <span>1</span>
+          <span>{itemQty}</span>
           <span>x</span>
-          <span>$ 19.99</span>
+          <span>{dollarFormatter.format(price / 100)}</span>
         </div>
       </CardCenter>
 
-      <DeleteContainer>
+      <DeleteContainer onClick={() => onRemoveProduct(transId)}>
         <Trash size={24} color="#E11D48" />
       </DeleteContainer>
     </CardContainer>

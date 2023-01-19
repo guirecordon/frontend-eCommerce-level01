@@ -45,7 +45,13 @@ export const ImagesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  height: 450px;
   gap: 0.5rem;
 
-  padding: 3rem 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+  margin-left: 1rem;
+
+  overflow-y: scroll;
 `;

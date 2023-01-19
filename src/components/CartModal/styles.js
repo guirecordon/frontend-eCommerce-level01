@@ -13,6 +13,8 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  overflow-y: scroll;
+
   h3 {
     font-size: 1.75rem;
     font-weight: 200;
@@ -51,4 +53,12 @@ export const ResetCart = styled.button`
   align-self: flex-start;
 
   cursor: pointer;
+`;
+
+export const EmptyCart = styled.div`
+  padding: 4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -1,4 +1,6 @@
 import {
+  CartHolder,
+  Counter,
   HeaderContainer,
   LeftSideNav,
   LogoContainer,
@@ -12,12 +14,14 @@ import {
   ShoppingCart,
   UserCircle,
 } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { CartModal } from '../CartModal';
 import { NavLink } from 'react-router-dom';
+import { CartContext } from '../../contexts/CartContext';
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { total } = useContext(CartContext);
 
   return (
     <HeaderContainer>
@@ -47,9 +51,10 @@ export function Header() {
         <a href="#">
           <UserCircle size={24} />
         </a>
-        <a href="#">
+        <CartHolder>
           <ShoppingCart size={24} onClick={() => setOpen(!open)} />
-        </a>
+          {total > 0 && <Counter>{total}</Counter>}
+        </CartHolder>
       </RightSideNav>
 
       {open && <CartModal />}

@@ -83,3 +83,26 @@ export const SearchBar = styled.div`
     }
   }
 `;
+
+export const CartHolder = styled.a`
+  position: relative;
+`;
+
+export const Counter = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: ${(props) => props.theme.searchBlue};
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  color: ${(props) => props.theme.gray100};
+  font-weight: bold;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
