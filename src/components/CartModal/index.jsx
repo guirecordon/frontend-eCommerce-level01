@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
+import { dollarFormatter } from '../../utils/formatter';
 import { ProductCard } from './components/ProductCard';
 import {
   CheckoutBtn,
@@ -9,7 +10,7 @@ import {
 } from './styles';
 
 export function CartModal() {
-  const { cartArray } = useContext(CartContext);
+  const { cartArray, totalPrice } = useContext(CartContext);
 
   return (
     <ModalContainer>
@@ -21,7 +22,7 @@ export function CartModal() {
 
       <SubtotalContainer>
         <h3>Subtotal</h3>
-        <span>$ 19.90</span>
+        <span>{dollarFormatter.format(totalPrice / 100)}</span>
       </SubtotalContainer>
 
       <CheckoutBtn>Proceed to checkout</CheckoutBtn>
