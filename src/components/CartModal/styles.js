@@ -13,6 +13,8 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  overflow-y: scroll;
+
   h3 {
     font-size: 1.75rem;
     font-weight: 200;
