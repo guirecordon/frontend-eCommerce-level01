@@ -10,6 +10,14 @@ export function CartContextProvider({ children }) {
     setCartArray([...cartArray, { ...product }]);
   }
 
+  function onRemoveProduct(id) {
+    const updatedAfterRemoval = cartArray.filter((product) => {
+      return product.id !== id;
+    });
+
+    setCartArray(updatedAfterRemoval);
+  }
+
   useEffect(() => {
     const totalQty = cartArray.reduce((acc, currVal) => {
       return (acc += currVal.itemQty);
@@ -19,7 +27,9 @@ export function CartContextProvider({ children }) {
   }, [cartArray]);
 
   return (
-    <CartContext.Provider value={{ total, fillCart }}>
+    <CartContext.Provider
+      value={{ total, fillCart, cartArray, onRemoveProduct }}
+    >
       {children}
     </CartContext.Provider>
   );

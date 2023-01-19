@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { CartContext } from '../../contexts/CartContext';
 import { ProductCard } from './components/ProductCard';
 import {
   CheckoutBtn,
@@ -7,11 +9,15 @@ import {
 } from './styles';
 
 export function CartModal() {
+  const { cartArray } = useContext(CartContext);
+
   return (
     <ModalContainer>
       <h3>Products in your cart</h3>
 
-      <ProductCard />
+      {cartArray.map((product) => (
+        <ProductCard key={product.id} {...product} />
+      ))}
 
       <SubtotalContainer>
         <h3>Subtotal</h3>
