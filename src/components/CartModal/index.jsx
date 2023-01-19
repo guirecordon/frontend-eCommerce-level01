@@ -4,6 +4,7 @@ import { dollarFormatter } from '../../utils/formatter';
 import { ProductCard } from './components/ProductCard';
 import {
   CheckoutBtn,
+  EmptyCart,
   ModalContainer,
   ResetCart,
   SubtotalContainer,
@@ -16,9 +17,15 @@ export function CartModal() {
     <ModalContainer>
       <h3>Products in your cart</h3>
 
-      {cartArray.map((product) => (
-        <ProductCard key={product.id} {...product} />
-      ))}
+      {cartArray.length > 0 ? (
+        cartArray.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))
+      ) : (
+        <EmptyCart>
+          <p>nothing there yet!</p>
+        </EmptyCart>
+      )}
 
       <SubtotalContainer>
         <h3>Subtotal</h3>

@@ -52,3 +52,11 @@ export const ResetCart = styled.button`
 
   cursor: pointer;
 `;
+
+export const EmptyCart = styled.div`
+  padding: 4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

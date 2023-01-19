@@ -79,10 +79,10 @@ export function Product() {
           <img
             src={data.product.images[0].url}
             alt=""
-            onClick={() => setImg(data.product.images[0].url)}
+            onClick={() => setImg(data.product.images[0]?.url)}
           />
           <img
-            src={data.product.images[1].url}
+            src={data.product.images[1]?.url}
             alt=""
             onClick={() => setImg(data.product.images[1].url)}
           />
