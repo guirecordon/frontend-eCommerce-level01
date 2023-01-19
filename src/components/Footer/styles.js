@@ -20,6 +20,7 @@ export const ListColumn = styled.div`
 
 export const DescriptionColumn = styled.div`
   p {
+    padding: 0.5rem 0;
     color: ${(props) => props.theme.fadeText};
   }
 `;
