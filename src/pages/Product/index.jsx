@@ -19,10 +19,11 @@ import {
 import side01 from '../../assets/Home/grid01.svg';
 import side02 from '../../assets/Home/grid02.svg';
 import { Heart, Scales, ShoppingCart } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { dollarFormatter } from '../../utils/formatter';
+import { CartContext } from '../../contexts/CartContext';
 
 export function Product() {
   const { id } = useParams();
@@ -41,13 +42,35 @@ export function Product() {
     }
   `;
 
+  const { fillCart } = useContext(CartContext);
   const [img, setImg] = useState('');
+  const [cartItem, setCartItem] = useState({});
+  const [itemQty, setItemQty] = useState(1);
+
+  function onMinusClick() {
+    if (itemQty > 1) {
+      setItemQty(itemQty - 1);
+    }
+  }
+
+  function onPlusClick() {
+    setItemQty(itemQty + 1);
+  }
 
   const { loading, error, data } = useQuery(GET_PRODUCT);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>error</p>;
-  console.log(data);
+
+  function handleAddToCart() {
+    setCartItem({
+      product: data.product.name,
+      description: data.product.description,
+      price: data.product.price,
+      quantity: itemQty,
+      image: data.product.images[0].url,
+    });
+  }
 
   return (
     <ProductContainer>
@@ -85,10 +108,12 @@ export function Product() {
           <ProductDescription>{data.product.description}</ProductDescription>
 
           <QtyCounter>
-            <SignButtons>-</SignButtons>1<SignButtons>+</SignButtons>
+            <SignButtons onClick={onMinusClick}>-</SignButtons>
+            {itemQty}
+            <SignButtons onClick={onPlusClick}>+</SignButtons>
           </QtyCounter>
 
-          <AddToCartBtn>
+          <AddToCartBtn onClick={() => fillCart({ ...data.product, itemQty })}>
             <ShoppingCart size={16} />
             Add to cart
           </AddToCartBtn>
