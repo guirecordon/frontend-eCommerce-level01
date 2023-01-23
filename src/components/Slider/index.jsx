@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import Slider01 from '../../assets/Home/slider01.svg';
 import Slider02 from '../../assets/Home/slider02.svg';
+import Slider03 from '../../assets/Home/slider03.svg';
 
 export function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -17,7 +18,7 @@ export function Slider() {
   }
 
   function handleNextSlide() {
-    if (currentSlide === 1) {
+    if (currentSlide === 2) {
       setCurrentSlide(0);
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -31,6 +32,7 @@ export function Slider() {
       >
         <img src={Slider01} alt="" />
         <img src={Slider02} alt="" />
+        <img src={Slider03} alt="" />
       </SliderContainer>
 
       <LeftArrow onClick={handlePreviousSlide}>
