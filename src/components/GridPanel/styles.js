@@ -48,7 +48,7 @@ export const CategoryBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: ${(props) => props.theme.fadeText};
+    background: ${(props) => props.theme.searchBlue};
     color: ${(props) => props.theme.white};
   }
 
